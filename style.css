@@ -1,0 +1,153 @@
+.playBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin: 150px auto;
+  font-size: 20px;
+}
+.container{
+  display: none;
+  margin-top: 20px;
+}
+.storeDiv{
+  width: 100px;
+  height: 150px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.storeDiv p{
+  font-size: 20px;
+  font-weight: bolder;
+}
+.store1{
+  position: absolute;
+  background-color: rgb(42, 84, 119);
+  color:white;
+  bottom: 180px;
+  left: 650px;
+  border: none;
+}
+.store2{
+  position: absolute;
+  right: 750px;
+  top: 34px;
+  color:white;
+  background-color: rgb(94, 47, 47);
+}
+.cube{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #333;
+  font-size: 30px;
+  text-align: center;
+  line-height: 60px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+.cube-1{
+  left: 20%;
+}
+.cube-2{
+  right: 20%;
+}
+.throwBtn{
+  position: absolute;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.firstPlayerMove{
+  left: 25%;
+}
+.secondPlayerMove{
+  right: 27%;
+}
+
+.moveSection-1{
+  position: absolute;
+  top: 10%;
+  left: 35%;
+}
+.moveSection-2{
+  position: absolute;
+  top: 10%;
+  right: 35%;
+}
+.moveSection div {
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 30%;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background: #f2f2f2;
+}
+.action-2{
+  right: 300px;
+  top: 170px;
+}
+.action-1{
+  top: 180px;
+  left: 205px;
+}
+.moveSection p{
+  /* position: relative; */
+  position: absolute;
+  display: flex;
+  cursor: pointer;
+}
+
+.finalScore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.moveSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.element-second{
+  padding: 2px 7px;
+  background-color: rgb(94, 47, 47);
+  color: white;
+  border-radius: 50%;
+  /* left: 10px; */
+  left: 25px;
+}
+.element-first{
+  padding: 2px 7px;
+  left: 2px;
+  background-color: rgb(42, 84, 119);
+  color:white;
+  border-radius: 50%;
+}
+
+.firstDiv{
+  z-index: 2;
+}
+.firstDiv p{
+  z-index: 999;
+}
