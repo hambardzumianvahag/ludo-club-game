@@ -110,14 +110,54 @@ playBtn.addEventListener('click', () => {
       moveDiv.style.transform = board2[j]
       moveDiv.classList.add(j, 'board2')
 
-    if(j === 51) moveDiv.style.background = 'rgb(173, 109, 109)'
-    if(j === 52) moveDiv.style.background = 'rgb(173, 109, 109)'
-    if(j === 53) moveDiv.style.background = 'rgb(173, 109, 109)'
-    if(j === 54) moveDiv.style.background = 'rgb(173, 109, 109)'
-    if(j === 55) moveDiv.style.background = 'rgb(173, 109, 109)'
-    if(j === 56) moveDiv.style.background = 'rgb(173, 109, 109)'
-
-
+    if(j === 0){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderRight = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderLeft = 'none'
+    } 
+    if(j === 51){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    }
+    if(j === 52){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 53){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 54){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 55){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 56){
+      moveDiv.style.background = 'rgb(173, 109, 109)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 26){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
 
       if(j === board2.length - 1) {
           moveDiv.innerHTML = `<p>&#x1F3C1;</p>`
@@ -129,15 +169,43 @@ playBtn.addEventListener('click', () => {
     moveDiv.style.transform = board1[j]
     moveDiv.classList.add(j, 'board1')
 
-    if(j === 0) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 51) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 52) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 53) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 54) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 55) moveDiv.style.background = 'rgb(42, 84, 119)'
-    if(j === 56) moveDiv.style.background = 'rgb(42, 84, 119)'
 
-    if(j === 26) moveDiv.style.background = 'rgb(173, 109, 109)'
+    if(j === 51){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    }
+    if(j === 52){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 53){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 54){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 55){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
+    if(j === 56){
+      moveDiv.style.background = 'rgb(115, 153, 184)'
+      moveDiv.style.borderLeft = 'none'
+      moveDiv.style.borderBottom = 'none'
+      moveDiv.style.borderRight = 'none'
+    } 
 
     if(j === board1.length - 1) {
         moveDiv.innerHTML = `<p>&#x1F3C1;</p>`
@@ -176,6 +244,7 @@ playBtn.addEventListener('click', () => {
     if(newIndex >= board2.length) {
         return false
     }
+
     positionsArr[i] = newIndex
     if(currentTurn === 'first') activeArr[i].style.transform = board1[newIndex]
     else activeArr[i].style.transform = board2[newIndex]
@@ -190,8 +259,15 @@ playBtn.addEventListener('click', () => {
     return true
   }
 
-  const divs = document.querySelectorAll('.moveSection div')
-  console.log(divs)
+  let arr = []
+  const divs = [...document.querySelectorAll('.moveSection div')]
+  for(let i = 0; i<divs.length; i++){
+    if(!arr.includes(divs[i].style.transform)){
+      arr.push(divs[i].style.transform)
+    } else {
+      divs[i].remove()
+    }
+  }
 
   clickBtn.addEventListener('click', () => {
     let cube1 = document.querySelector('.cube-1')
@@ -249,22 +325,24 @@ playBtn.addEventListener('click', () => {
                 newElement.style.transform = board1[0];
                 newElement.addEventListener('click', (item)=>{
                   if(turnOf1){
-                  let success = movePiece(parseInt(item.target.innerHTML - 1), num, active1, positions1, 'first')
+                  let success = movePiece(parseInt(item.target.innerHTML - 1), parseInt(cube1.innerHTML), active1, positions1, 'first')
                   document.querySelector('.actionDiv').remove()
                   if(success) {
                       checkWinner()
                       actionDiv.remove()
                       clickBtn.style.display = 'block'
                     } else {
+                      console.log(turn)
                     actionDiv.remove()
                     clickBtn.style.display = 'block'
-                    turn = 'second'
-                    clickBtn.classList.remove('firstPlayerMove')
-                    clickBtn.classList.add('secondPlayerMove')
-                    turnOf1 = false
                     }
+                    if(num < 6){
+                      turn = 'second'
+                      clickBtn.classList.remove('firstPlayerMove')
+                      clickBtn.classList.add('secondPlayerMove')
+                    }
+                    turnOf1 = false
                   }
-                  turnOf1 = false
                 })
                 actionDiv.remove();
                 clickBtn.style.display = 'block';
@@ -354,6 +432,7 @@ playBtn.addEventListener('click', () => {
       cube2.innerHTML = num
       cube1.innerHTML = 1
       turnOf2 = true
+      console.log(num)
       // If no active element and num < 6, pass 
       if(active2.length === 0 && num < 6) {
         turn = 'first'
@@ -396,7 +475,7 @@ playBtn.addEventListener('click', () => {
                 newElement.addEventListener('click', (item)=>{
                   if(turnOf2){
                     document.querySelector('.actionDiv').remove()
-                    let success = movePiece(parseInt(item.target.innerHTML - 1), num, active2, positions2, 'second')
+                    let success = movePiece(parseInt(item.target.innerHTML - 1), parseInt(cube2.innerHTML), active2, positions2, 'second')
                       if(success) {
                         checkWinner()
                         actionDiv.remove()
@@ -404,13 +483,14 @@ playBtn.addEventListener('click', () => {
                       } else {
                       actionDiv.remove()
                       clickBtn.style.display = 'block'
-                      turn = 'first'
-                      clickBtn.classList.add('firstPlayerMove')
-                      clickBtn.classList.remove('secondPlayerMove')
-                      turnOf2 = false
                       }
+                      if(num < 6){
+                        turn = 'first'
+                        clickBtn.classList.add('firstPlayerMove')
+                        clickBtn.classList.remove('secondPlayerMove')
+                      }
+                      turnOf2 = false
                   }
-                  turnOf2 = false
                 })
                 actionDiv.remove();
                 clickBtn.style.display = 'block';
