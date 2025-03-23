@@ -10,6 +10,8 @@
 .container{
   display: none;
   margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 .storeDiv{
   width: 100px;
@@ -25,17 +27,11 @@
   font-weight: bolder;
 }
 .store1{
-  position: absolute;
   background-color: rgb(42, 84, 119);
   color:white;
-  bottom: 180px;
-  left: 650px;
   border: none;
 }
 .store2{
-  position: absolute;
-  right: 750px;
-  top: 34px;
   color:white;
   background-color: rgb(94, 47, 47);
 }
@@ -93,27 +89,19 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: absolute;
   top: 30%;
   border: 1px solid #ddd;
   padding: 10px;
   margin: 10px 0;
+  position: absolute;
   background: #f2f2f2;
-}
-.action-2{
-  right: 300px;
-  top: 170px;
-}
-.action-1{
-  top: 180px;
-  left: 205px;
 }
 .moveSection p{
   /* position: relative; */
   position: absolute;
   display: flex;
   cursor: pointer;
-  transition: transform 1s ease-in;
+  transition: transform 0.3s linear;
 }
 
 .finalScore{
