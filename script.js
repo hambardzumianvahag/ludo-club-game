@@ -134,22 +134,31 @@ playBtn.addEventListener('click', () => {
         let storeDiv = document.createElement('div')
         storeDiv.classList.add('storeDiv')
         startDiv.append(storeDiv)
+
+
         for (let j = 1; j <= 4; j++){
             let p = document.createElement('img')
             p.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png'
             p.classList.add('eachElement', `p${j}`)
             p.id = j
+            // If it's player1, background is colorP1; if player2, background is colorP2
+            if (i === 1) {
+                p.style.backgroundColor = colorP1
+            } else {
+                p.style.backgroundColor = colorP2
+            }
             storeDiv.append(p);
         }
+
         if (i === 1){
-          player1.prepend(startDiv)
-          storeDiv.style.color = colorP1
-        } 
-        else {
-          storeDiv.style.color = colorP2
-          player2.append(startDiv)
+            player1.prepend(startDiv)
+            storeDiv.style.color = colorP1
         }
-      }
+        else {
+            storeDiv.style.color = colorP2
+            player2.append(startDiv)
+        }
+    }
 
     // cube
     for (let i = 1; i <= 2; i++){
@@ -351,10 +360,12 @@ playBtn.addEventListener('click', () => {
                             }
                         }
                         let newElement = document.createElement('img')
-                        newElement.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png' 
-                        newElement.classList.add('element-first', 'eachElement')
+                        newElement.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png'
+                        newElement.classList.add('element-first','eachElement')
                         newElement.id = nextNum
                         newElement.style.top = `${(nextNum - 1)*10 - 18}px`
+                        // The next line ensures it has a blue background:
+                        newElement.style.backgroundColor = colorP1
 
                         let firstSquare = document.querySelector('.moveSection div:nth-child(1)');
                         firstSquare.classList.add('firstDiv');
@@ -520,10 +531,13 @@ playBtn.addEventListener('click', () => {
                                 break;
                             }
                         }
-                        let newElement = document.createElement('p');
-                        newElement.classList.add('element-second');
+                        let newElement = document.createElement('img');
+                        newElement.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png';
+                        newElement.classList.add('element-second','eachElement');
+                        newElement.id = nextNum;
                         newElement.style.top = `${(nextNum-1)*10 - 18}px`;
-                        newElement.innerHTML = nextNum;
+                        // The next line ensures it has a red background:
+                        newElement.style.backgroundColor = colorP2
 
                         let firstSquare = document.querySelector('.moveSection div:nth-child(1)');
                         firstSquare.classList.add('firstDiv');
