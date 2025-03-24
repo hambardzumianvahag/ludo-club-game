@@ -2,18 +2,38 @@ const playBtn     = document.querySelector('.playBtn')
 const container   = document.querySelector('.container')
 const finalScore  = document.querySelector('.finalScore')
 
-let blankDiv =document.createElement('div')
+let blankDiv1 =document.createElement('div')
+let blankDiv2 =document.createElement('div')
 let player1 = document.createElement('div')
 let player2 = document.createElement('div')
+
+let player1Action = document.createElement('div')
+let player2Action = document.createElement('div')
+
+player1Action.classList.add('player1Action')
+player2Action.classList.add('player2Action')
 player1.classList.add('player1')
 player2.classList.add('player2')
-blankDiv.classList.add('blankDiv')
+blankDiv1.classList.add('blankDiv')
+blankDiv2.classList.add('blankDiv')
+
+
+container.before(player2Action)
+container.after(player1Action)
 
 const STEP_SIZE = 50
 const START_X1 = -2 * STEP_SIZE
 const START_Y1 = 12 * STEP_SIZE
 const START_X2 = 0
 const START_Y2 = 0
+
+// some dynamic styles
+
+blankDiv1.style.width = `${STEP_SIZE * 3}px`
+blankDiv1.style.height = `${STEP_SIZE * 3}px`
+blankDiv2.style.height = `${STEP_SIZE * 3}px`
+blankDiv2.style.width = `${STEP_SIZE * 3}px`
+container.style.maxWidth = `${STEP_SIZE * 15 +3 }px`
 
 // creating a board
 
@@ -108,35 +128,48 @@ playBtn.addEventListener('click', () => {
     // store
     for (let i = 1; i <= 2; i++) {
         let startDiv = document.createElement('div')
-        startDiv.classList.add('storeDiv', `store${i}`)
+        startDiv.classList.add('startDiv', `store${i}`)
+        startDiv.style.width = `${STEP_SIZE * 6}px`
+        startDiv.style.height = `${STEP_SIZE * 6}px`
+        let storeDiv = document.createElement('div')
+        storeDiv.classList.add('storeDiv')
+        startDiv.append(storeDiv)
         for (let j = 1; j <= 4; j++){
-            let p = document.createElement('p')
-            p.innerHTML = j
+            let p = document.createElement('img')
+            p.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png'
             p.classList.add('eachElement', `p${j}`)
-            startDiv.append(p);
+            p.id = j
+            storeDiv.append(p);
         }
-        if (i === 1) player1.prepend(startDiv)
-        else player2.append(startDiv)
-    }
+        if (i === 1){
+          player1.prepend(startDiv)
+          storeDiv.style.color = colorP1
+        } 
+        else {
+          storeDiv.style.color = colorP2
+          player2.append(startDiv)
+        }
+      }
 
     // cube
     for (let i = 1; i <= 2; i++){
         let cube = document.createElement('div')
         cube.classList.add('cube', `cube-${i}`)
         cube.innerHTML = 1
-        if(i === 1) player1.append(cube)
-        else player2.append(cube)
+        if(i === 1) player1Action.append(cube)
+        else player2Action.append(cube)
     }
 
     // throw btn
     let clickBtn = document.createElement('button')
     clickBtn.innerHTML = 'throw'
     clickBtn.classList.add('throwBtn','firstPlayerMove');
-    container.append(clickBtn)
+    player1Action.append(clickBtn)
 
     // move board
     let moveSection = document.createElement('div');
     moveSection.classList.add('moveSection')
+    moveSection.style.left = `${STEP_SIZE*2}px`
 
     // Helper to fill squares
     function FillSquare(div, index, arr, color) {
@@ -146,6 +179,7 @@ playBtn.addEventListener('click', () => {
         // specific case
         if(index  === 28){
             div.style.background = colorP1
+            div.innerHTML = "<span class='starSymbol'>&#9734;</span>"
         }
         if(index === 26){
           div.innerHTML = "<span class='arrowSymbol arrowUp'>&#708;</span>"
@@ -163,11 +197,15 @@ playBtn.addEventListener('click', () => {
         if(j === 5 || j === 19 || j === 33 || j === 47){
           moveDiv.style.border = 'none'
         }
+        if(j === 0) {
+          moveDiv.style.border = 'none'
+        }
         if (j === board2.length - 1) {
             moveDiv.style.borderBottom = 'none'
-            moveDiv.style.borderLeft = '75px solid transparent'
-            moveDiv.style.borderRight = '75px solid transparent'
-            moveDiv.style.borderTop = `48px solid ${colorP2}`
+            moveDiv.style.borderLeft = `${STEP_SIZE*1.5}px solid transparent`
+            moveDiv.style.borderRight = `${STEP_SIZE*1.5}px solid transparent`
+            moveDiv.style.borderTop = `${STEP_SIZE*1.5}px solid ${colorP2}`
+            moveDiv.style.marginTop = `${STEP_SIZE/2}px`
         }
         moveSection.append(moveDiv);
     }
@@ -178,20 +216,19 @@ playBtn.addEventListener('click', () => {
         FillSquare(moveDiv, j, indexesP1, colorP1);
         if (j === board1.length - 1) {
           moveDiv.style.borderTop = 'none'
-          moveDiv.style.borderLeft = '75px solid transparent'
-          moveDiv.style.borderRight = '75px solid transparent'
-          moveDiv.style.borderBottom = `48px solid ${colorP1}`
+          moveDiv.style.borderLeft = `${STEP_SIZE*1.5}px solid transparent`
+          moveDiv.style.borderRight = `${STEP_SIZE*1.5}px solid transparent`
+          moveDiv.style.borderBottom = `${STEP_SIZE*1.5}px solid ${colorP1}`
+          moveDiv.style.marginBottom = `${STEP_SIZE/2+1}px`
         }
         moveSection.append(moveDiv)
     }
-    // container.prepend(blankDiv)
-    // container.prepend(player2)
-    // container.append(moveSection)
-    // container.append(blankDiv)
-    // container.append(player1)
-    container.prepend(player1)
+    container.prepend(player2)
     container.append(moveSection)
-    container.append(player2)
+    container.append(player1)
+
+    player2.before(blankDiv1)
+    player1.after(blankDiv2)
 
     let turn = 'first'
     let score1 = 0
@@ -282,8 +319,10 @@ playBtn.addEventListener('click', () => {
             // If no active element and num < 6, pass
             if(active1.length === 0 && num < 6) {
                 turn = 'second';
-                clickBtn.classList.remove('firstPlayerMove');
-                clickBtn.classList.add('secondPlayerMove');
+                clickBtn.remove()
+                clickBtn.classList.remove('firstPlayerMove')
+                clickBtn.classList.add('secondPlayerMove')
+                player2Action.append(clickBtn)
                 turnOf1 = false;
                 return;
             }
@@ -293,8 +332,8 @@ playBtn.addEventListener('click', () => {
                 const actionDiv = document.createElement('div');
                 actionDiv.classList.add('actionDiv','action-1');
 
-                let store1 = document.querySelector('.store1');
-                let storePieces = document.querySelectorAll('.store1 p');
+                let store1 = document.querySelector('.store1 .storeDiv');
+                let storePieces = document.querySelectorAll('.store1 img');
                 let total1 = active1.length + score1;
 
                 if (total1 < 4) {
@@ -306,15 +345,16 @@ playBtn.addEventListener('click', () => {
                         turnOf1 = false;
                         let nextNum = active1.length + score1 + 1;
                         for (let item of storePieces) {
-                            if (item.innerHTML == nextNum) {
+                            if (item.id == nextNum) {
                                 store1.removeChild(item)
                                 break
                             }
                         }
-                        let newElement = document.createElement('p')
-                        newElement.classList.add('element-first')
+                        let newElement = document.createElement('img')
+                        newElement.src = 'https://cdn-icons-png.flaticon.com/512/106/106175.png' 
+                        newElement.classList.add('element-first', 'eachElement')
+                        newElement.id = nextNum
                         newElement.style.top = `${(nextNum - 1)*10 - 18}px`
-                        newElement.innerHTML = nextNum
 
                         let firstSquare = document.querySelector('.moveSection div:nth-child(1)');
                         firstSquare.classList.add('firstDiv');
@@ -325,7 +365,7 @@ playBtn.addEventListener('click', () => {
                         newElement.style.transform = board1[0]
 
                         newElement.addEventListener('click', async (ev) => {
-                          let index = active1.findIndex((item)=>item.innerHTML === ev.target.innerHTML)
+                          let index = active1.findIndex((item)=>item.innerHTML === ev.target.id)
                           if(turnOf1){
                             document.querySelector('.actionDiv')?.remove();
                                 let success = await movePiece(
@@ -343,8 +383,10 @@ playBtn.addEventListener('click', () => {
                                 } 
                                 if(parseInt(cube1.innerHTML) < 6){
                                     turn = 'second';
-                                    clickBtn.classList.remove('firstPlayerMove');
-                                    clickBtn.classList.add('secondPlayerMove');
+                                    clickBtn.remove()
+                                    clickBtn.classList.remove('firstPlayerMove')
+                                    clickBtn.classList.add('secondPlayerMove')
+                                    player2Action.append(clickBtn)
                                     turnOf1 = false;
                                 }
                             }
@@ -384,7 +426,7 @@ playBtn.addEventListener('click', () => {
                         actionDiv.appendChild(pieceBtn)
                     }
                 }
-                store1.after(actionDiv)
+                player1Action.prepend(actionDiv)
             }
             // if num < 6
             else {
@@ -393,8 +435,10 @@ playBtn.addEventListener('click', () => {
                     movePiece(0, num, active1, positions1, 'first');
                     checkWinner();
                     turn = 'second';
-                    clickBtn.classList.remove('firstPlayerMove');
-                    clickBtn.classList.add('secondPlayerMove');
+                    clickBtn.remove()
+                    clickBtn.classList.remove('firstPlayerMove')
+                    clickBtn.classList.add('secondPlayerMove')
+                    player2Action.append(clickBtn)
                     turnOf1 = false;
                 }
                 else if (active1.length > 1) {
@@ -424,13 +468,15 @@ playBtn.addEventListener('click', () => {
                                 checkWinner();
                             } 
                             turn = 'second';
-                            clickBtn.classList.remove('firstPlayerMove');
-                            clickBtn.classList.add('secondPlayerMove');
+                            clickBtn.remove()
+                            clickBtn.classList.remove('firstPlayerMove')
+                            clickBtn.classList.add('secondPlayerMove')
+                            player2Action.append(clickBtn)
                             turnOf1 = false;
                         });
                         actionDiv.appendChild(pieceBtn);
                     }
-                    store1.after(actionDiv);
+                    player1Action.append(actionDiv);
                 }
             }
         }
@@ -443,8 +489,10 @@ playBtn.addEventListener('click', () => {
             // If no active element and num < 6, pass
             if(active2.length === 0 && num < 6) {
                 turn = 'first';
-                clickBtn.classList.add('firstPlayerMove');
-                clickBtn.classList.remove('secondPlayerMove');
+                clickBtn.remove()
+                clickBtn.classList.add('firstPlayerMove')
+                clickBtn.classList.remove('secondPlayerMove')
+                player1Action.append(clickBtn)
                 turnOf2 = false;
                 return;
             }
@@ -454,8 +502,8 @@ playBtn.addEventListener('click', () => {
                 const actionDiv = document.createElement('div');
                 actionDiv.classList.add('actionDiv','action-2');
 
-                let store2 = document.querySelector('.store2');
-                let storePieces = document.querySelectorAll('.store2 p');
+                let store2 = document.querySelector('.store2 .storeDiv');
+                let storePieces = document.querySelectorAll('.store2 img');
                 let total2 = active2.length + score2;
 
                 if(total2 < 4) {
@@ -467,7 +515,7 @@ playBtn.addEventListener('click', () => {
                         turnOf2 = false;
                         let nextNum = active2.length + score2 + 1;
                         for (let item of storePieces) {
-                            if (item.innerHTML == nextNum) {
+                            if (item.id == nextNum) {
                                 store2.removeChild(item);
                                 break;
                             }
@@ -504,8 +552,10 @@ playBtn.addEventListener('click', () => {
                                 } 
                                 if(parseInt(cube2.innerHTML) < 6){
                                     turn = 'first';
-                                    clickBtn.classList.add('firstPlayerMove');
-                                    clickBtn.classList.remove('secondPlayerMove');
+                                    clickBtn.remove()
+                                    clickBtn.classList.add('firstPlayerMove')
+                                    clickBtn.classList.remove('secondPlayerMove')
+                                    player1Action.append(clickBtn)
                                     turnOf2 = false;
                                 }
                             }
@@ -543,7 +593,7 @@ playBtn.addEventListener('click', () => {
                         actionDiv.appendChild(pieceBtn)
                     }
                 }
-                store2.after(actionDiv)
+                player2Action.append(actionDiv)
             }
             // if num < 6
             else {
@@ -552,8 +602,10 @@ playBtn.addEventListener('click', () => {
                     movePiece(0, num, active2, positions2, 'second');
                     checkWinner();
                     turn = 'first'
+                    clickBtn.remove()
                     clickBtn.classList.add('firstPlayerMove')
-                    clickBtn.classList.remove('secondPlayerMove');
+                    clickBtn.classList.remove('secondPlayerMove')
+                    player1Action.append(clickBtn)   
                     turnOf2 = false
                 }
                 else if (active2.length > 1) {
@@ -575,16 +627,17 @@ playBtn.addEventListener('click', () => {
                             clickBtn.style.display = 'block';
                             if(success) {
                                 checkWinner()
-
                             }
                             turn = 'first'
+                            clickBtn.remove()
                             clickBtn.classList.add('firstPlayerMove')
                             clickBtn.classList.remove('secondPlayerMove')
+                            player1Action.append(clickBtn)
                             turnOf2 = false
                         });
                         actionDiv.appendChild(pieceBtn)
                     }
-                    store2.after(actionDiv)
+                    player2Action.append(actionDiv)
                 }
             }
         }

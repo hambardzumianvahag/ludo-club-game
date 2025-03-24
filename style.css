@@ -12,10 +12,16 @@
   margin-top: 20px;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: fit-content;
+  max-width: 753px;
+  gap: 150px ;
+  flex-wrap: wrap;
 }
-.storeDiv{
-  width: 100px;
-  height: 150px;
+.startDiv{
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -23,7 +29,7 @@
   gap: 10px;
 }
 .storeDiv p{
-  font-size: 20px;
+  font-size: 45px;
   font-weight: bolder;
 }
 .store1{
@@ -47,10 +53,10 @@
   margin-bottom: 10px;
 }
 .cube-1{
-  left: 20%;
+  left: 0%;
 }
 .cube-2{
-  right: 20%;
+  right: 0%;
 }
 .throwBtn{
   position: absolute;
@@ -58,10 +64,12 @@
   cursor: pointer;
 }
 .firstPlayerMove{
-  left: 25%;
+  left: 77px;
+  bottom: 20px;
 }
 .secondPlayerMove{
-  right: 27%;
+  right: 7%;
+  top: 14px;
 }
 
 .moveSection-1{
@@ -116,11 +124,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 77px;
+  position: absolute;
+  left: 100px;
+  right: 0;
+  top: 0;
 }
 .element-second{
   padding: 2px 7px;
   background-color: #d72015;
+  border: 1px solid gray;
+  box-shadow: 1px 1px  gray;
   color: white;
   border-radius: 50%;
   /* left: 10px; */
@@ -129,6 +143,8 @@
 .element-first{
   padding: 2px 7px;
   left: 2px;
+  border: 1px solid gray;
+  box-shadow: 1px 1px  gray;
   background-color: #006bcf;
   color:white;
   border-radius: 50%;
@@ -150,4 +166,44 @@
 }
 .arrowDown{
   color: #d91f18;
+}
+
+.player1Action, .player2Action{
+  position: relative;
+}
+.player1Action{
+  display: flex;
+  justify-items: flex-start;
+  align-items: flex-end;
+  height: 98vh;
+  width: 250px;
+}
+.player2Action{
+  display: flex;
+  justify-content: flex-end;
+}
+.action-2{
+  right: 0%;
+  top: 60px;
+}
+.action-1{
+  left: 0%;
+  top: 70%;
+}
+
+.starSymbol{
+  color: white;
+  font-size: 45px;
+}
+.storeDiv{
+  display: flex;
+  gap: 25px; 
+  padding: 40px;
+  background-color: white;
+  min-width: 165px;
+}
+
+.eachElement{
+  width: 25px;
+  height: 25px;
 }
