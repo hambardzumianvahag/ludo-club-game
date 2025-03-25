@@ -17,7 +17,7 @@
   right: 0;
   margin-inline: auto;
   width: fit-content;
-  max-width: 753px;
+  max-width: 751px;
   gap: 150px ;
   flex-wrap: wrap;
 }
@@ -82,7 +82,7 @@
   top: 10%;
   right: 35%;
 }
-.moveSection div {
+.moveSection > div {
   width: 50px;
   height: 50px;
   box-sizing: border-box;
@@ -109,7 +109,7 @@
   position: absolute;
   display: flex;
   cursor: pointer;
-  transition: transform 0.3s linear;
+  transition: transform 0.5s linear;
 }
 
 .finalScore{
@@ -130,24 +130,37 @@
   right: 0;
   top: 0;
 }
+.element-first, .element-second{
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  z-index: 99;
+}
 .element-second{
-  padding: 2px 7px;
-  background-color: #d72015;
-  border: 1px solid gray;
-  box-shadow: 1px 1px  gray;
-  color: white;
-  border-radius: 50%;
-  /* left: 10px; */
-  left: 25px;
+  left: 20px;
 }
 .element-first{
-  padding: 2px 7px;
-  left: 2px;
-  border: 1px solid gray;
-  box-shadow: 1px 1px  gray;
-  background-color: #006bcf;
+  left: 0;
+}
+.element-second svg{
+  padding: 4px 2px;
+  /* background-color: #d72015; */
+  /* border: 1px solid gray; */
+  /* box-shadow: 1px 1px  gray; */
+  color: white;
+  /* border-radius: 50%; */
+  position: absolute;
+  cursor: pointer;
+  left: 10px;
+}
+.element-first svg{
+  position: absolute;
+  padding: 4px 2px;
+  /* border: 1px solid gray; */
+  /* box-shadow: 1px 1px  gray; */
+  /* background-color: #006bcf; */
   color:white;
-  border-radius: 50%;
+  cursor: pointer;
 }
 
 .firstDiv{
@@ -197,13 +210,13 @@
 }
 .storeDiv{
   display: flex;
-  gap: 25px; 
+  gap: 35px; 
   padding: 40px;
   background-color: white;
-  min-width: 165px;
+  min-width: 189px;
 }
 
 .eachElement{
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
 }
